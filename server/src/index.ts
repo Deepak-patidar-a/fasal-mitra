@@ -3,6 +3,8 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
+import { createServer } from 'http'
+import { Server } from 'socket.io'
 
 dotenv.config()
 
@@ -15,8 +17,19 @@ import './models/Order'
 import cropRoutes from './routes/cropRoutes'
 import diseaseRoutes from './routes/diseaseRoutes'
 import authRoutes from './routes/authRoutes'
+import productRoutes from './routes/productRoutes'
+import orderRoutes from './routes/orderRoutes'
 
 const app = express()
+const httpServer = createServer(app)
+
+// Socket.io setup
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:5173',
+    credentials: true
+  }
+})
 const PORT = process.env.PORT || 8000
 
 // Middleware
@@ -31,6 +44,69 @@ app.use(cookieParser())
 app.use('/api/auth', authRoutes)
 app.use('/api/crops', cropRoutes)
 app.use('/api/diseases', diseaseRoutes)
+app.use('/api/products', productRoutes)
+app.use('/api/orders', orderRoutes)
+
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'Server is running 🌱' ,
+    db: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'
+  })
+})
+
+// Socket.io logic
+io.on('connection', (socket) => {
+  console.log(`User connected: ${socket.id}`)
+
+  // Join a crop room
+  socket.on('join_room', (room: string) => {
+    socket.join(room)
+    console.log(`${socket.id} joined room: ${room}`)
+
+    // Tell everyone in room someone joined
+    socket.to(room).emit('user_joined', {
+      message: `A new user joined the ${room} discussion`
+    })
+  })
+
+  // Leave a room
+  socket.on('leave_room', (room: string) => {
+    socket.leave(room)
+    console.log(`${socket.id} left room: ${room}`)
+  })
+
+  // Send message to room
+  socket.on('send_message', (data: {
+    room: string
+    message: string
+    userName: string
+    userRole: string
+    timestamp: string
+  }) => {
+    // Broadcast to everyone in room including sender
+    io.to(data.room).emit('receive_message', {
+      id: `${socket.id}_${Date.now()}`,
+      message: data.message,
+      userName: data.userName,
+      userRole: data.userRole,
+      timestamp: data.timestamp
+    })
+  })
+
+  // Typing indicator
+  socket.on('typing', (data: { room: string; userName: string }) => {
+    socket.to(data.room).emit('user_typing', { userName: data.userName })
+  })
+
+  socket.on('stop_typing', (data: { room: string }) => {
+    socket.to(data.room).emit('user_stop_typing')
+  })
+
+  socket.on('disconnect', () => {
+    console.log(`User disconnected: ${socket.id}`)
+  })
+})
+
 
 // MongoDB Connection
 const connectDB = async () => {
@@ -47,13 +123,6 @@ const connectDB = async () => {
 
 connectDB()
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'Server is running 🌱' ,
-    db: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'
-  })
-})
-
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

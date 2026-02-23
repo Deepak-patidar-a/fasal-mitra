@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Search, Mic, Leaf, CloudRain, TrendingUp } from 'lucide-react'
+import { Search, Mic, Leaf, CloudRain, TrendingUp, Microscope } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { searchCrops, getAllCrops } from '@/services/cropService'
 import WeatherWidget from '@/components/common/WeatherWidget'
 import MandiPrices from '@/components/common/MandiPrices'
+import ImageDiagnosis from '@/components/common/ImageDiagnosis'
 
 
 
@@ -236,6 +237,70 @@ const Home = () => {
             </div>
         </div>
         </section>
+      {/* AI Diagnosis Section */}
+{/* AI Diagnosis Section */}
+<section className="px-4 md:px-8 lg:px-12 py-8">
+  <div className="max-w-7xl mx-auto">
+    <h2 className="text-lg font-bold text-text-primary mb-3">
+      {t('ai_diagnosis_heading')}
+    </h2>
+
+    <div className="bg-surface border border-border rounded-2xl p-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        {/* Left — Upload & Diagnose */}
+        <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="bg-primary/10 p-2.5 rounded-xl">
+                <Microscope className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-text-primary">
+                  {t('ai_diagnosis_title')}
+                </h3>
+                <p className="text-xs text-text-secondary">
+                  {t('ai_diagnosis_subtitle')}
+                </p>
+              </div>
+            </div>
+            <ImageDiagnosis />
+          </div>
+
+          {/* Right — How it works */}
+          <div className="flex flex-col justify-center gap-6 lg:border-l lg:border-border lg:pl-8">
+            <h3 className="text-base font-bold text-text-primary">
+              {t('how_it_works')}
+            </h3>
+
+            {[1, 2, 3].map((step) => (
+              <div key={step} className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+                  <span className="text-sm font-bold text-primary">{step}</span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-sm font-semibold text-text-primary">
+                    {t(`how_step_${step}_title`)}
+                  </p>
+                  <p className="text-xs text-text-secondary leading-relaxed">
+                    {t(`how_step_${step}_desc`)}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            {/* Disclaimer */}
+            <div className="bg-warning/10 border border-warning/20 rounded-xl px-4 py-3 mt-2">
+              <p className="text-xs text-warning leading-relaxed">
+                {t('diagnosis_disclaimer')}
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+        
       {/* Popular Crops Grid */}
       <section className="px-4 md:px-8 lg:px-12 py-12">
         <div className="max-w-7xl mx-auto">

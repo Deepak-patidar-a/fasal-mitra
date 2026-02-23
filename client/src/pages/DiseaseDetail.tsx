@@ -216,6 +216,7 @@ const DiseaseDetail = () => {
               {disease.products.map((product) => (
                 <div
                   key={product._id}
+                  onClick={() => navigate(`/product/${product._id}`)}
                   className="bg-surface border border-border rounded-xl p-5 flex flex-col gap-3"
                 >
                   <div className="flex items-start justify-between gap-2">

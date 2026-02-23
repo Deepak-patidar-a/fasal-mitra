@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Leaf, Droplets, Sun, Layers, AlertTriangle, ArrowLeft } from 'lucide-react'
+import { Leaf, Droplets, Sun, Layers, AlertTriangle, ArrowLeft, MessageCircle } from 'lucide-react'
 import { getCropBySlug } from '@/services/cropService'
 import { useAuth } from '@/context/AuthContext'
 import MandiPrices from '@/components/common/MandiPrices'
@@ -17,6 +17,7 @@ interface Disease {
 interface Crop {
   _id: string
   name: { en: string; hi: string }
+  slug: string 
   type: 'Kharif' | 'Rabi' | 'Zaid'
   season: { en: string; hi: string }
   irrigationNeeds: { en: string; hi: string }
@@ -122,6 +123,7 @@ const CropDetail = () => {
                 </span>
               </div>
               {user && (
+                <div className="flex items-center gap-3">
             <button
                 onClick={() => toggleSaveCrop(crop._id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors text-sm font-medium ${
@@ -133,6 +135,14 @@ const CropDetail = () => {
                 <Leaf className="w-4 h-4" />
                 {isSaved ? t('saved') : t('save_crop')}
             </button>
+            <button
+              onClick={() => navigate(`/chat/${crop.slug}`)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-surface text-text-secondary hover:border-primary hover:text-primary transition-colors text-sm font-medium"
+            >
+              <MessageCircle className="w-4 h-4" />
+              {t('join_chat')}
+            </button>
+            </div>
             )}
               <p className="text-text-secondary text-sm md:text-base">
                 {t('crop_detail_subtitle', { name: crop.name[lang] })}
