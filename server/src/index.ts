@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
@@ -57,7 +57,7 @@ app.use('/api/products', productRoutes)
 app.use('/api/orders', orderRoutes)
 
 // Health check
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (req : Request, res : Response) => {
   res.json({ status: 'Server is running 🌱' ,
     db: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'
   })
