@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="32" fill="#4A7C59"/>
+  
+  <!-- Soil/ground base -->
+  <ellipse cx="32" cy="48" rx="18" ry="4" fill="#3A6347" opacity="0.6"/>
+
+  <!-- Main stem -->
+  <path d="M32 46 Q31 38 30 30 Q29 22 32 16" 
+        stroke="#8DB87A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Left large leaf -->
+  <path d="M30 30 Q18 24 16 14 Q24 16 30 26 Z" 
+        fill="#8DB87A"/>
+  <path d="M30 30 Q18 24 16 14" 
+        stroke="#4A7C59" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.5"/>
+
+  <!-- Right large leaf -->
+  <path d="M31 24 Q43 18 46 8 Q38 12 31 22 Z" 
+        fill="#6BA568"/>
+  <path d="M31 24 Q43 18 46 8" 
+        stroke="#4A7C59" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.5"/>
+
+  <!-- Small top leaf -->
+  <path d="M32 16 Q38 10 40 4 Q34 8 32 14 Z" 
+        fill="#8DB87A" opacity="0.9"/>
+
+  <!-- Sun rays top right -->
+  <circle cx="50" cy="14" r="5" fill="#D4890A" opacity="0.85"/>
+  <line x1="50" y1="7" x2="50" y2="5" stroke="#D4890A" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  <line x1="55" y1="9" x2="57" y2="7" stroke="#D4890A" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  <line x1="57" y1="14" x2="59" y2="14" stroke="#D4890A" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Small water drops bottom left -->
+  <ellipse cx="16" cy="46" rx="2.5" ry="3.5" fill="#7EC8E3" opacity="0.8"/>
+  <ellipse cx="22" cy="50" rx="2" ry="2.8" fill="#7EC8E3" opacity="0.6"/>
+</svg>

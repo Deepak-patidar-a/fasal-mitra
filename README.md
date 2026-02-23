@@ -5,13 +5,12 @@
 ---
 
 ## 🚀 Live Demo
-- Frontend: _coming soon_
-- Backend: _coming soon_
+https://fasal-mitra.vercel.app
 
 ---
 
 ## 📸 Screenshots
-_Add screenshots here once UI is complete_
+![alt text](image.png)
 
 ---
 
@@ -43,7 +42,7 @@ _Add screenshots here once UI is complete_
 |---|---|
 | OpenWeatherMap | Local weather + irrigation alerts |
 | Data.gov.in | Live mandi (market) prices |
-| Razorpay _(coming soon)_ | Payment gateway |
+| Razorpay  | Payment gateway |
 
 ---
 
@@ -82,11 +81,11 @@ _Add screenshots here once UI is complete_
 - [x] Scrollable mandi price table with refresh
 
 ### Coming Soon
-- [ ] AI image diagnosis (TensorFlow.js / Hugging Face)
-- [ ] E-commerce listings with price comparison
-- [ ] Razorpay payment integration
-- [ ] Real-time expert chat (Socket.io)
-- [ ] Deployment (Vercel + Render)
+- [x] AI image diagnosis (TensorFlow.js / Hugging Face)
+- [x] E-commerce listings with price comparison
+- [x] Razorpay payment integration
+- [x] Real-time expert chat (Socket.io)
+- [x] Deployment (Vercel + Render)
 
 ---
 
@@ -134,7 +133,7 @@ agri-app/
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/yourusername/fasal-mitra.git
+git clone https://github.com/Deepak-Patidar-a/fasal-mitra.git
 cd fasal-mitra
 ```
 
