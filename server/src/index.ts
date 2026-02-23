@@ -23,18 +23,27 @@ import orderRoutes from './routes/orderRoutes'
 const app = express()
 const httpServer = createServer(app)
 
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  process.env.FRONTEND_URL as string
+].filter(Boolean)
+
 // Socket.io setup
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:5173',
-    credentials: true
-  }
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ['GET', 'POST']
+  },
+  transports: ['websocket', 'polling']
 })
 const PORT = process.env.PORT || 8000
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: allowedOrigins,
   credentials: true
 }))
 app.use(express.json())

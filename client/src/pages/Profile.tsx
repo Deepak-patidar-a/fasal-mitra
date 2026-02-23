@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '@/context/AuthContext'
-import { User, Mail, Phone, MapPin, Leaf, Clock } from 'lucide-react'
+import { User, Mail, Leaf, Clock } from 'lucide-react'
 
 const Profile = () => {
   const { t } = useTranslation()

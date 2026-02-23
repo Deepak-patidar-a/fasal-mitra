@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { connectSocket, disconnectSocket } from '@/services/socketService'
+import { connectSocket} from '@/services/socketService'
 
 export interface ChatMessage {
   id: string
