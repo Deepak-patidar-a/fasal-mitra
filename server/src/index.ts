@@ -24,16 +24,18 @@ const app = express()
 const httpServer = createServer(app)
 
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-  process.env.FRONTEND_URL as string
-].filter(Boolean)
-console.log('Allowed origins:', allowedOrigins)
+// const allowedOrigins = [
+//   'http://localhost:5173',
+//   'http://127.0.0.1:5173',
+//   process.env.FRONTEND_URL as string
+// ].filter(Boolean)
+
 // Socket.io setup
 const io = new Server(httpServer, {
   cors: {
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      callback(null, true)
+    },
     credentials: true,
     methods: ['GET', 'POST']
   },
@@ -43,9 +45,16 @@ const PORT = process.env.PORT || 8000
 
 // Middleware
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
+  origin: function (origin, callback) {
+    callback(null, true)
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }))
+
+// Handle preflight requests
+app.options('*', cors())
 app.use(express.json())
 app.use(cookieParser())
 
