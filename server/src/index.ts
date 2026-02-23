@@ -29,7 +29,7 @@ const allowedOrigins = [
   'http://127.0.0.1:5173',
   process.env.FRONTEND_URL as string
 ].filter(Boolean)
-
+console.log('Allowed origins:', allowedOrigins)
 // Socket.io setup
 const io = new Server(httpServer, {
   cors: {
