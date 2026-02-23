@@ -5,7 +5,7 @@
 ---
 
 ## 🚀 Live Demo
-https://fasal-mitra.vercel.app
+[https://fasal-mitra.vercel.app](https://fasal-mitra-kappa.vercel.app/)
 
 ---
 
