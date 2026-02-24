@@ -37,7 +37,7 @@ const ProductDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as 'en' | 'hi'
+  const lang = (i18n.language?.split('-')[0] || 'en') as 'en' | 'hi'
   const { user } = useAuth()
 
   const [product, setProduct] = useState<Product | null>(null)

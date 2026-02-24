@@ -21,7 +21,7 @@ interface CropSummary {
 
 const Home = () => {
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as 'en' | 'hi'
+  const lang = (i18n.language?.split('-')[0] || 'en') as 'en' | 'hi'
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [dbCrops, setDbCrops] = useState<CropSummary[]>([])

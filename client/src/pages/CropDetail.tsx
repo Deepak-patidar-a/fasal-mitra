@@ -36,7 +36,7 @@ const CropDetail = () => {
   const { slug } = useParams()
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as 'en' | 'hi'
+  const lang = (i18n.language?.split('-')[0] || 'en') as 'en' | 'hi'
   
 
   const [crop, setCrop] = useState<Crop | null>(null)
