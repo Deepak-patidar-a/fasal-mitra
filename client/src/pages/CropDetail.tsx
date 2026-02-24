@@ -5,6 +5,7 @@ import { Leaf, Droplets, Sun, Layers, AlertTriangle, ArrowLeft, MessageCircle } 
 import { getCropBySlug } from '@/services/cropService'
 import { useAuth } from '@/context/AuthContext'
 import MandiPrices from '@/components/common/MandiPrices'
+import LazyImage from '@/components/common/LazyImage'
 
 interface Disease {
   _id: string
@@ -214,10 +215,11 @@ const CropDetail = () => {
                   {/* Disease Image */}
                   <div className="w-full h-40 bg-primary/5 flex items-center justify-center overflow-hidden">
                     {disease.images[0] ? (
-                      <img
+                      <LazyImage
                         src={disease.images[0]}
                         alt={disease.name[lang]}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full"
+                        fallback={<AlertTriangle className="w-10 h-10 text-text-secondary/30" />}
                       />
                     ) : (
                       <AlertTriangle className="w-10 h-10 text-text-secondary/30" />

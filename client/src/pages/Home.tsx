@@ -7,6 +7,7 @@ import { searchCrops, getAllCrops } from '@/services/cropService'
 import WeatherWidget from '@/components/common/WeatherWidget'
 import MandiPrices from '@/components/common/MandiPrices'
 import ImageDiagnosis from '@/components/common/ImageDiagnosis'
+import { useDebounce } from '@/hooks/useDebounce'
 
 
 
@@ -27,6 +28,7 @@ const Home = () => {
   const [dbCrops, setDbCrops] = useState<CropSummary[]>([])
   const [searchResults, setSearchResults] = useState<CropSummary[]>([])
   const [searching, setSearching] = useState(false)
+  const debouncedQuery = useDebounce(query, 400)
   
 
   useEffect(() => {
@@ -34,24 +36,25 @@ const Home = () => {
     }, [])
 
   useEffect(() => {
-    if (!query.trim()) {
-        setSearchResults([])
-        return
-    }
-    const timeout = setTimeout(async () => {
-        setSearching(true)
-        try {
-        const results = await searchCrops(query)
-        setSearchResults(results)
-        } catch {
-        setSearchResults([])
-        } finally {
-        setSearching(false)
-        }
-    }, 400)
+  if (!debouncedQuery.trim()) {
+    setSearchResults([])
+    return
+  }
 
-    return () => clearTimeout(timeout)
-    }, [query])
+  const search = async () => {
+    setSearching(true)
+    try {
+      const results = await searchCrops(debouncedQuery)
+      setSearchResults(results)
+    } catch {
+      setSearchResults([])
+    } finally {
+      setSearching(false)
+    }
+  }
+
+  search()
+}, [debouncedQuery])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -168,7 +171,7 @@ const Home = () => {
           {/* Popular Crops */}
           <div className="flex flex-wrap justify-center gap-2">
             <span className="text-sm text-text-secondary">{t('popular')}:</span>
-            {cropsToShow.map((crop) => (
+            {cropsToShow.slice(0, 5).map((crop) => (
             <button
                 key={'slug' in crop ? crop.slug : (crop as any).slug}
                 onClick={() => navigate(`/crop/${'slug' in crop ? crop.slug : (crop as any).slug}`)}
