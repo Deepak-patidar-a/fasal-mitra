@@ -6,6 +6,7 @@ import ProtectedRoute from '@/components/common/ProtectedRoute'
 import { Leaf } from 'lucide-react'
 
 const Home = lazy(() => import('@/pages/Home'))
+const Crops = lazy(() => import('@/pages/Crops'))
 const CropDetail = lazy(() => import('@/pages/CropDetail'))
 const DiseaseDetail = lazy(() => import('@/pages/DiseaseDetail'))
 const Login = lazy(() => import('@/pages/Login'))
@@ -34,6 +35,7 @@ function App() {
           <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/crops" element={<Crops />} />
         <Route path="/crop/:slug" element={<CropDetail />} />
         <Route path="/disease/:slug" element={<DiseaseDetail />} />
         <Route path="/login" element={<Login />} />

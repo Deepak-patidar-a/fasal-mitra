@@ -15,7 +15,7 @@ export const getCropBySlug = async (req: Request, res: Response) => {
     }
 
     const crop = await Crop.findOne({ slug })
-      .populate('diseases', 'name slug severity images')
+      .populate('diseases', 'name slug severity images').lean()
 
     if (!crop) {
       return res.status(404).json({ message: 'Crop not found' })
@@ -27,6 +27,7 @@ export const getCropBySlug = async (req: Request, res: Response) => {
 
     res.json(crop)
   } catch (error) {
+    console.error('getCropBySlug error:', error)
     res.status(500).json({ message: 'Server error' })
   }
 }
@@ -41,12 +42,15 @@ export const getAllCrops = async (req: Request, res: Response) => {
       return res.json(cached)
     }
 
-    const crops = await Crop.find({}, 'name slug type images')
+    const crops = await Crop.find({}, 'name slug type images').lean()
+    // Convert to plain JS object before caching — fixes node-cache clone issue
+    
     setCache(cacheKey, crops)
     console.log('Cache MISS: all_crops')
 
     res.json(crops)
   } catch (error) {
+    console.error('getAllCrops error:', error)
     res.status(500).json({ message: 'Server error' })
   }
 }
@@ -76,11 +80,12 @@ export const searchCrops = async (req: Request, res: Response) => {
         ]
       } as any,
       'name slug type images'
-    )
+    ).lean()
 
     setCache(cacheKey, crops)
     res.json(crops)
   } catch (error) {
+    console.error('searchCrops error:', error)
     res.status(500).json({ message: 'Server error' })
   }
 }

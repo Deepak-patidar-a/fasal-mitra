@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import User from '../models/User'
 import { generateTokens } from '../utils/generateTokens'
 
+
 export const register = async (req: Request, res: Response) => {
   try {
     const { name, email, phone, password, role, preferredLanguage } = req.body
@@ -114,22 +115,33 @@ export const saveCrop = async (req: Request, res: Response) => {
     const userId = (req as any).userId
     const { cropId } = req.body
 
-    const user = await User.findById(userId)
-    if (!user) return res.status(404).json({ message: 'User not found' })
-
-    // Toggle save — if already saved, unsave it
-    const alreadySaved = user.savedCrops.includes(cropId)
-    if (alreadySaved) {
-      user.savedCrops = user.savedCrops.filter(
-        (id) => id.toString() !== cropId
-      )
-    } else {
-      user.savedCrops.push(cropId)
+    if (!cropId) {
+      return res.status(400).json({ message: 'cropId is required' })
     }
 
-    await user.save()
-    res.json({ savedCrops: user.savedCrops, saved: !alreadySaved })
-  } catch {
+    // Check if already saved
+    const user = await User.findById(userId).lean()
+    if (!user) return res.status(404).json({ message: 'User not found' })
+
+    const alreadySaved = user.savedCrops
+      .map((id: any) => id.toString())
+      .includes(cropId)
+
+    if (alreadySaved) {
+      // Remove from saved
+      await User.findByIdAndUpdate(userId, {
+        $pull: { savedCrops: cropId }
+      })
+    } else {
+      // Add to saved
+      await User.findByIdAndUpdate(userId, {
+        $addToSet: { savedCrops: cropId }
+      })
+    }
+
+    res.json({ saved: !alreadySaved })
+  } catch (error) {
+    console.error('saveCrop error:', error)
     res.status(500).json({ message: 'Server error' })
   }
 }
@@ -139,21 +151,25 @@ export const addToSearchHistory = async (req: Request, res: Response) => {
     const userId = (req as any).userId
     const { query } = req.body
 
-    const user = await User.findById(userId)
-    if (!user) return res.status(404).json({ message: 'User not found' })
+    if (!query) {
+      return res.status(400).json({ message: 'Query is required' })
+    }
 
-    // Remove duplicate if exists
-    user.searchHistory = user.searchHistory.filter((q) => q !== query)
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        $push: {
+          searchHistory: {
+            $each: [query],
+            $slice: -10
+          }
+        }
+      }
+    )
 
-    // Add to front
-    user.searchHistory.unshift(query)
-
-    // Keep only last 10 searches
-    user.searchHistory = user.searchHistory.slice(0, 10)
-
-    await user.save()
-    res.json({ searchHistory: user.searchHistory })
-  } catch {
+    res.json({ message: 'Search history updated' })
+  } catch (error) {
+    console.error('addToSearchHistory error:', error)
     res.status(500).json({ message: 'Server error' })
   }
 }

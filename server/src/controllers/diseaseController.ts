@@ -15,7 +15,7 @@ export const getDiseaseBySlug = async (req: Request, res: Response) => {
 
     const disease = await Disease.findOne({ slug })
       .populate('crops', 'name slug')
-      .populate('products', 'name type description images listings')
+      .populate('products', 'name type description images listings').lean()
 
     if (!disease) {
       return res.status(404).json({ message: 'Disease not found' })
@@ -24,6 +24,7 @@ export const getDiseaseBySlug = async (req: Request, res: Response) => {
     setCache(cacheKey, disease)
     res.json(disease)
   } catch (error) {
+    console.error('getDiseaseBySlug error:', error)
     res.status(500).json({ message: 'Server error' })
   }
 }
@@ -38,11 +39,13 @@ export const getAllDiseases = async (req: Request, res: Response) => {
     }
 
     const diseases = await Disease.find({}, 'name slug severity images crops')
-      .populate('crops', 'name slug')
+      .populate('crops', 'name slug').lean()
+    
 
     setCache(cacheKey, diseases)
     res.json(diseases)
   } catch (error) {
+    console.error('getAllDiseases error:', error)
     res.status(500).json({ message: 'Server error' })
   }
 }

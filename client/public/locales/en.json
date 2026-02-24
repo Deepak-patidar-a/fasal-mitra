@@ -150,5 +150,11 @@
   "login_to_chat": "Login to join the discussion",
   "chat_placeholder": "Ask a question or share knowledge...",
   "chat_enter_hint": "Press Enter to send",
-  "join_chat": "Join Discussion"
+  "join_chat": "Join Discussion",
+  "all_crops": "All Crops",
+  "crops_heading": "Explore All Crops",
+  "crops_subheading": "Browse our database of crops and learn about diseases, care and solutions",
+  "no_crops_found": "No crops found for this category",
+  "all": "All",
+  "something_went_wrong": "Something went wrong. Please try again."
 }
