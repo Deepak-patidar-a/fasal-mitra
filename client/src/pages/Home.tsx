@@ -8,6 +8,7 @@ import WeatherWidget from '@/components/common/WeatherWidget'
 import MandiPrices from '@/components/common/MandiPrices'
 import ImageDiagnosis from '@/components/common/ImageDiagnosis'
 import { useDebounce } from '@/hooks/useDebounce'
+import PageTransition from '@/components/common/PageTransition'
 
 
 
@@ -93,6 +94,7 @@ const Home = () => {
   ]
   const cropsToShow = dbCrops.length > 0 ? dbCrops : popularCrops
   return (
+    <PageTransition>
     <div className="flex flex-col">
 
       {/* Hero Section */}
@@ -331,6 +333,7 @@ const Home = () => {
       </section>
 
     </div>
+    </PageTransition>
   )
 }
 

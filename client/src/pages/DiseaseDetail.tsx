@@ -9,6 +9,7 @@ import {
   Leaf
 } from 'lucide-react'
 import { getDiseaseBySlug } from '@/services/diseaseService'
+import PageTransition from '@/components/common/PageTransition'
 
 interface Product {
   _id: string
@@ -100,6 +101,7 @@ const DiseaseDetail = () => {
   }
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-background">
 
       {/* Hero */}
@@ -238,6 +240,7 @@ const DiseaseDetail = () => {
       </section>
 
     </div>
+    </PageTransition>
   )
 }
 

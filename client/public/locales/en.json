@@ -156,5 +156,7 @@
   "crops_subheading": "Browse our database of crops and learn about diseases, care and solutions",
   "no_crops_found": "No crops found for this category",
   "all": "All",
-  "something_went_wrong": "Something went wrong. Please try again."
+  "something_went_wrong": "Something went wrong. Please try again.",
+  "profile": "Profile",
+  "chat": "Chat"
 }

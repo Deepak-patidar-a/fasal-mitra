@@ -4,6 +4,8 @@ import Navbar from '@/components/common/Navbar'
 import Footer from '@/components/common/Footer'
 import ProtectedRoute from '@/components/common/ProtectedRoute'
 import { Leaf } from 'lucide-react'
+import { AnimatePresence } from 'framer-motion'
+import BottomNav from '@/components/common/BottomNav'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Crops = lazy(() => import('@/pages/Crops'))
@@ -31,8 +33,9 @@ function App() {
     <BrowserRouter>
     <div className="min-h-screen bg-background flex flex-col">
         <Navbar />
-        <main className="flex-1">
+        <main className="flex-1 pb-16 md:pb-0">
           <Suspense fallback={<PageLoader />}>
+          <AnimatePresence mode="wait">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/crops" element={<Crops />} />
@@ -49,9 +52,18 @@ function App() {
             } />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </AnimatePresence>
       </Suspense>
       </main>
-      <Footer/>
+      {/* Footer only on desktop */}
+      <div className="hidden md:block">
+        <Footer />
+      </div>
+
+      {/* Bottom Nav only on mobile */}
+      <div className="md:hidden">
+        <BottomNav />
+      </div>
     </div>
     </BrowserRouter>
   )

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '@/context/AuthContext'
 import { User, Mail, Leaf, Clock } from 'lucide-react'
+import PageTransition from '@/components/common/PageTransition'
 
 const Profile = () => {
   const { t } = useTranslation()
@@ -9,6 +10,7 @@ const Profile = () => {
   if (!user) return null
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-background px-4 md:px-8 lg:px-12 py-10">
       <div className="max-w-4xl mx-auto">
 
@@ -81,6 +83,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    </PageTransition>
   )
 }
 

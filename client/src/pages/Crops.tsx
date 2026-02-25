@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Leaf, AlertTriangle } from 'lucide-react'
 import { getAllCrops } from '@/services/cropService'
+import { CropDetailSkeleton, CropsPageSkeleton } from '@/components/common/Skeleton'
+import PageTransition from '@/components/common/PageTransition'
+
 
 interface Crop {
   _id: string
@@ -48,11 +51,7 @@ const Crops = () => {
     : crops.filter(c => c.type === filter)
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Leaf className="w-10 h-10 text-primary animate-pulse" />
-      </div>
-    )
+    return <CropsPageSkeleton />
   }
 
   if (error) {
@@ -67,6 +66,7 @@ const Crops = () => {
   }
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-background">
 
       {/* Header */}
@@ -156,6 +156,7 @@ const Crops = () => {
         </div>
       </section>
     </div>
+    </PageTransition>
   )
 }
 

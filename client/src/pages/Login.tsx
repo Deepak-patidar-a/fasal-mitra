@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Leaf, Eye, EyeOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/context/AuthContext'
+import PageTransition from '@/components/common/PageTransition'
 
 const Login = () => {
   const { t } = useTranslation()
@@ -34,6 +35,7 @@ const Login = () => {
   }
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
 
@@ -111,6 +113,7 @@ const Login = () => {
 
       </div>
     </div>
+    </PageTransition>
   )
 }
 

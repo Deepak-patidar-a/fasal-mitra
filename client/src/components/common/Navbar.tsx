@@ -50,7 +50,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <Leaf className="text-green-600 w-6 h-6" />
+          <Leaf className="text-green-600 w-6 h-6 animate-pulse" />
           <span className="text-xl font-bold text-primary tracking-tight">
             {t('app_name')}
           </span>

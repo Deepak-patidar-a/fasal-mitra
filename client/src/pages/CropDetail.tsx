@@ -6,6 +6,8 @@ import { getCropBySlug } from '@/services/cropService'
 import { useAuth } from '@/context/AuthContext'
 import MandiPrices from '@/components/common/MandiPrices'
 import LazyImage from '@/components/common/LazyImage'
+import { CropDetailSkeleton } from '@/components/common/Skeleton'
+import PageTransition from '@/components/common/PageTransition'
 
 interface Disease {
   _id: string
@@ -66,14 +68,7 @@ const CropDetail = () => {
 
   // Loading State
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <Leaf className="w-10 h-10 text-primary animate-pulse" />
-          <p className="text-text-secondary">{t('loading')}</p>
-        </div>
-      </div>
-    )
+    return <CropDetailSkeleton />
   }
 
   // Error State
@@ -97,6 +92,7 @@ const CropDetail = () => {
   }
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-background">
 
       {/* Hero Banner */}
@@ -253,6 +249,7 @@ const CropDetail = () => {
         </div>
         </section>
     </div>
+    </PageTransition>
   )
 }
 
