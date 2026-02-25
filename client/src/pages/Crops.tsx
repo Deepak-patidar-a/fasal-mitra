@@ -5,6 +5,7 @@ import { Leaf, AlertTriangle } from 'lucide-react'
 import { getAllCrops } from '@/services/cropService'
 import { CropsPageSkeleton } from '@/components/common/Skeleton'
 import PageTransition from '@/components/common/PageTransition'
+import LazyImage from '@/components/common/LazyImage'
 
 
 interface Crop {
@@ -124,7 +125,7 @@ const Crops = () => {
                 {/* Crop icon */}
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   {crop.images[0] ? (
-                    <img
+                    <LazyImage
                       src={crop.images[0]}
                       alt={crop.name[lang]}
                       className="w-full h-full object-cover rounded-full"

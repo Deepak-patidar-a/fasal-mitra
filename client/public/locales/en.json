@@ -158,5 +158,22 @@
   "all": "All",
   "something_went_wrong": "Something went wrong. Please try again.",
   "profile": "Profile",
-  "chat": "Chat"
+  "chat": "Chat",
+  "my_orders": "My Orders",
+  "my_orders_desc": "Track your fertilizer and pesticide purchases",
+  "no_orders_title": "No orders yet",
+  "no_orders_desc": "Browse crops, find disease solutions and buy recommended products",
+  "browse_crops": "Browse Crops",
+  "ordered_on": "Ordered on",
+  "seller": "Seller",
+  "quantity": "Quantity",
+  "unit": "unit",
+  "price_per_unit": "Price per unit",
+  "total_amount": "Total Amount",
+  "order_confirmed_delivery": "Order confirmed! Seller will contact you for delivery.",
+  "quick_links": "Quick Links",
+  "saved_crops": "Saved Crops",
+  "crops_saved": "crops saved",
+  "no_saved_crops_title": "No saved crops yet",
+  "no_saved_crops_desc": "Save crops you grow or are interested in for quick access"
 }

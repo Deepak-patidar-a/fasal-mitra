@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Menu, X, Leaf, User, LogOut, ChevronDown, Settings } from 'lucide-react'
+import { Menu, X, Leaf, User, LogOut, ChevronDown, Settings, ShoppingBag, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/context/AuthContext'
 
@@ -109,6 +109,22 @@ const Navbar = () => {
                     >
                     <Settings className="w-4 h-4" />
                     {t('my_profile')}
+                    </Link>
+                    <Link
+                      to="/saved-crops"
+                      onClick={() => setDropdownOpen(false)}
+                      className="w-full flex items-center gap-2 px-4 py-3 text-sm text-text-secondary hover:bg-background transition-colors border-b border-border"
+                    >
+                      <Heart className="w-4 h-4" />
+                      {t('saved_crops')}
+                    </Link>
+                    <Link
+                      to="/orders"
+                      onClick={() => setDropdownOpen(false)}
+                      className="w-full flex items-center gap-2 px-4 py-3 text-sm text-text-secondary hover:bg-background transition-colors border-b border-border"
+                    >
+                      <ShoppingBag className="w-4 h-4" />
+                      {t('my_orders')}
                     </Link>
                   <button
                     onClick={handleLogout}

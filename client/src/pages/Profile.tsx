@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '@/context/AuthContext'
-import { User, Mail, Leaf, Clock } from 'lucide-react'
+import { User, Mail, Leaf, Clock, ShoppingBag, Heart } from 'lucide-react'
 import PageTransition from '@/components/common/PageTransition'
+import { Link } from 'react-router-dom'
+
 
 const Profile = () => {
   const { t } = useTranslation()
@@ -79,7 +81,35 @@ const Profile = () => {
               </div>
             </div>
           </div>
-
+          
+          <div className="bg-surface border border-border rounded-2xl p-6">
+            <h3 className="text-sm font-bold text-text-primary uppercase tracking-wide mb-4">
+              {t('quick_links')}
+            </h3>
+            <div className="flex flex-col gap-2">
+              <Link
+                to="/orders"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl border border-border hover:border-primary hover:bg-primary/5 transition-all"
+              >
+                <ShoppingBag className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-text-primary">{t('my_orders')}</span>
+              </Link>
+              <Link
+                  to="/saved-crops"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl border border-border hover:border-primary hover:bg-primary/5 transition-all"
+                >
+                  <Heart className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-medium text-text-primary">{t('saved_crops')}</span>
+                </Link>
+              <Link
+                to="/crops"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl border border-border hover:border-primary hover:bg-primary/5 transition-all"
+              >
+                <Leaf className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-text-primary">{t('browse_crops')}</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

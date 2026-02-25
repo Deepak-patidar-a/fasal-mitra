@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button'
 import { getProductById } from '@/services/productService'
 import { useAuth } from '@/context/AuthContext'
 import { useRazorpay } from '@/hooks/useRazorpay'
+import LazyImage from '@/components/common/LazyImage'
 
 interface Listing {
   _id: string
@@ -112,7 +113,7 @@ const ProductDetail = () => {
 
   // Sort listings by price ascending
   const sortedListings = [...product.listings].sort((a, b) => a.price - b.price)
-
+  console.log("image", product.images[0])
   return (
     <div className="min-h-screen bg-background">
 
@@ -132,7 +133,7 @@ const ProductDetail = () => {
             {/* Product Image */}
             <div className="w-full md:w-64 h-64 bg-surface border border-border rounded-2xl flex items-center justify-center shrink-0">
               {product.images[0] ? (
-                <img
+                <LazyImage
                   src={product.images[0]}
                   alt={product.name[lang]}
                   className="w-full h-full object-cover rounded-2xl"

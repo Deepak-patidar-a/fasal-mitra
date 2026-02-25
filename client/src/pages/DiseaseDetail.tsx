@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { getDiseaseBySlug } from '@/services/diseaseService'
 import PageTransition from '@/components/common/PageTransition'
+import LazyImage from '@/components/common/LazyImage'
 
 interface Product {
   _id: string
@@ -116,9 +117,19 @@ const DiseaseDetail = () => {
           </button>
 
           <div className="flex flex-col md:flex-row md:items-center gap-6">
-            <div className="w-20 h-20 bg-error/10 rounded-2xl flex items-center justify-center shrink-0">
-              <AlertTriangle className="w-10 h-10 text-error" />
-            </div>
+            <div className="w-40 h-40 md:h-44 md:w-44 rounded-2xl overflow-hidden border border-border mb-6">
+            {disease.images[0] ? (
+              <LazyImage
+                src={disease.images[0]}
+                alt={disease.name[lang]}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-primary/5 flex items-center justify-center">
+                <AlertTriangle className="w-16 h-16 text-text-secondary/20" />
+              </div>
+            )}
+          </div>
             <div className="flex flex-col gap-2">
               <div className="flex flex-wrap items-center gap-3">
                 <h1 className="text-3xl md:text-4xl font-bold text-text-primary">
@@ -149,7 +160,7 @@ const DiseaseDetail = () => {
       </section>
 
       {/* Disease Images */}
-      {disease.images.length > 0 && (
+      {/* {disease.images.length > 0 && (
         <section className="px-4 md:px-8 lg:px-12 py-6">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -164,7 +175,7 @@ const DiseaseDetail = () => {
             </div>
           </div>
         </section>
-      )}
+      )} */}
 
       {/* Symptoms & Prevention */}
       <section className="px-4 md:px-8 lg:px-12 py-8">

@@ -16,6 +16,8 @@ const Profile = lazy(() => import('@/pages/Profile'))
 const ProductDetail = lazy(() => import('@/pages/ProductDetail'))
 const Chat = lazy(() => import('@/pages/Chat'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
+const Orders = lazy(() => import('@/pages/Orders'))
+const SavedCrops = lazy(() => import('@/pages/SavedCrops'))
 
 // Global loading fallback
 const PageLoader = () => (
@@ -46,6 +48,16 @@ function App() {
         <Route path="/profile" element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            } />
+            <Route path="/orders" element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            } />
+            <Route path="/saved-crops" element={
+              <ProtectedRoute>
+                <SavedCrops />
               </ProtectedRoute>
             } />
         <Route path="*" element={<NotFound />} />

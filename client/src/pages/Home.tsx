@@ -9,6 +9,7 @@ import MandiPrices from '@/components/common/MandiPrices'
 import ImageDiagnosis from '@/components/common/ImageDiagnosis'
 import { useDebounce } from '@/hooks/useDebounce'
 import PageTransition from '@/components/common/PageTransition'
+import LazyImage from '@/components/common/LazyImage'
 
 
 
@@ -30,7 +31,7 @@ const Home = () => {
   const [searchResults, setSearchResults] = useState<CropSummary[]>([])
   const [searching, setSearching] = useState(false)
   const debouncedQuery = useDebounce(query, 400)
-  
+  const [listening, setListening] = useState(false)
 
   useEffect(() => {
     getAllCrops().then(setDbCrops).catch(console.error)
@@ -58,29 +59,43 @@ const Home = () => {
 }, [debouncedQuery])
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (query.trim()) {
-      navigate(`/crop/${query.trim().toLowerCase()}`)
+      e.preventDefault()
+      if (query.trim()) {
+        navigate(`/crop/${query.trim().toLowerCase()}`)
+      }
     }
-  }
 
-  const handleVoiceSearch = () => {
+    const handleVoiceSearch = () => {
     const SpeechRecognition =
       (window as any).SpeechRecognition ||
       (window as any).webkitSpeechRecognition
 
     if (!SpeechRecognition) {
-      alert('Voice search not supported in this browser')
+      alert(t('voice_not_supported'))
       return
     }
 
     const recognition = new SpeechRecognition()
-    recognition.lang = 'hi-IN'
+    recognition.lang = i18n.language === 'hi' ? 'hi-IN' : 'en-IN'
+    recognition.interimResults = false
+    recognition.maxAlternatives = 1
+
+    setListening(true)  // show visual feedback
+
     recognition.start()
 
     recognition.onresult = (event: any) => {
       const transcript = event.results[0][0].transcript
       setQuery(transcript)
+      setListening(false)
+    }
+
+    recognition.onerror = () => {
+      setListening(false)
+    }
+
+    recognition.onend = () => {
+      setListening(false)
     }
   }
 
@@ -131,10 +146,12 @@ const Home = () => {
               className="flex-1 bg-transparent outline-none text-text-primary placeholder:text-text-secondary text-sm md:text-base"
             />
             <button
-              type="button"
               onClick={handleVoiceSearch}
-              className="text-text-secondary hover:text-primary transition-colors p-1"
-              aria-label="Voice search"
+              className={`p-2 rounded-full transition-colors ${
+                listening
+                  ? 'text-error animate-pulse bg-error/10'
+                  : 'text-text-secondary hover:text-primary'
+              }`}
             >
               <Mic className="w-5 h-5" />
             </button>
@@ -179,9 +196,19 @@ const Home = () => {
                 onClick={() => navigate(`/crop/${'slug' in crop ? crop.slug : (crop as any).slug}`)}
                 className="bg-surface border border-border rounded-xl p-4 flex flex-col items-center gap-3 hover:border-primary hover:shadow-md transition-all group"
             >
-                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <Leaf className="w-7 h-7 text-primary" />
-                </div>
+                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors overflow-hidden">
+                    {('images' in crop && (crop as any).images?.[0]) ? (
+                      <LazyImage
+                        src={(crop as any).images[0]}
+                        alt={'name' in crop && typeof crop.name === 'object'
+                          ? (crop.name as any)[lang]
+                          : (crop as any).label}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <Leaf className="w-7 h-7 text-primary" />
+                    )}
+                  </div>
                 <span className="text-sm font-medium text-text-primary">
                 {'name' in crop && typeof crop.name === 'object'
                     ? (crop.name as any)[lang]
@@ -315,17 +342,30 @@ const Home = () => {
           <p className="text-text-secondary mb-8">{t('popular_crops_subheading')}</p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {popularCrops.map((crop) => (
+            {cropsToShow.map((crop) => (
               <button
                 key={crop.slug}
                 onClick={() => navigate(`/crop/${crop.slug}`)}
                 className="bg-surface border border-border rounded-xl p-4 flex flex-col items-center gap-3 hover:border-primary hover:shadow-md transition-all group"
               >
-                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <Leaf className="w-7 h-7 text-primary" />
+                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors overflow-hidden">
+                  {('images' in crop && (crop as any).images?.[0]) ? (
+                    <LazyImage
+                      src={(crop as any).images[0]}
+                      alt={'name' in crop && typeof crop.name === 'object'
+                        ? (crop.name as any)[lang]
+                        : (crop as any).label}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Leaf className="w-7 h-7 text-primary" />
+                  )}
                 </div>
-                <span className="text-sm font-medium text-text-primary">{crop.label}</span>
-                <span className="text-xs text-text-secondary">{crop.labelHi}</span>
+                <span className="text-sm font-medium text-text-primary">
+                  {'name' in crop && typeof crop.name === 'object'
+                    ? (crop.name as any)[lang]
+                    : (crop as any).label}
+                </span>
               </button>
             ))}
           </div>

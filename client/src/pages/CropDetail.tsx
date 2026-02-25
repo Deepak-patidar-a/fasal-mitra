@@ -107,8 +107,18 @@ const CropDetail = () => {
           </button>
 
           <div className="flex flex-col md:flex-row md:items-center gap-6">
-            <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center shrink-0">
-              <Leaf className="w-10 h-10 text-primary" />
+            <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border-2 border-border shrink-0 bg-primary/10">
+              {crop.images[0] ? (
+                <img
+                  src={crop.images[0]}
+                  alt={crop.name[lang]}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <Leaf className="w-10 h-10 text-primary" />
+                </div>
+              )}
             </div>
             <div>
               <div className="flex items-center gap-3 mb-2">

@@ -28,7 +28,7 @@ const seedData = async () => {
     slug: 'wheat-blight',
     symptoms: { en: 'Brown spots on leaves, wilting, yellowing of tips', hi: 'पत्तियों पर भूरे धब्बे, मुरझाना, सिरों का पीला पड़ना' },
     prevention: { en: 'Use resistant varieties, avoid overhead irrigation, apply fungicide', hi: 'प्रतिरोधी किस्मों का उपयोग करें, ऊपर से सिंचाई से बचें, फफूंदनाशक लगाएं' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80'], products: [], crops: []
   })
 
   const wheatRust = await Disease.create({
@@ -36,7 +36,7 @@ const seedData = async () => {
     slug: 'wheat-rust',
     symptoms: { en: 'Orange-red pustules on leaves and stems', hi: 'पत्तियों और तनों पर नारंगी-लाल फुंसियां' },
     prevention: { en: 'Apply fungicide early, use certified seeds', hi: 'जल्दी फफूंदनाशक लगाएं, प्रमाणित बीजों का उपयोग करें' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80'], products: [], crops: []
   })
 
   const wheatPowderyMildew = await Disease.create({
@@ -44,7 +44,7 @@ const seedData = async () => {
     slug: 'wheat-powdery-mildew',
     symptoms: { en: 'White powdery coating on leaves and stems, stunted growth', hi: 'पत्तियों और तनों पर सफेद पाउडर जैसी परत, विकास रुकना' },
     prevention: { en: 'Improve air circulation, apply sulfur-based fungicide, avoid excess nitrogen', hi: 'वायु संचार सुधारें, सल्फर आधारित फफूंदनाशक लगाएं' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80'], products: [], crops: []
   })
 
   // RICE diseases
@@ -53,7 +53,7 @@ const seedData = async () => {
     slug: 'rice-blast',
     symptoms: { en: 'Diamond-shaped lesions on leaves, neck rot, white or gray center with brown border', hi: 'पत्तियों पर हीरे के आकार के घाव, गर्दन सड़न, भूरे किनारे के साथ सफेद केंद्र' },
     prevention: { en: 'Use blast-resistant varieties, apply tricyclazole fungicide, balanced fertilization', hi: 'ब्लास्ट प्रतिरोधी किस्में उपयोग करें, ट्राइसाइक्लाज़ोल फफूंदनाशक लगाएं' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=800&q=80'], products: [], crops: []
   })
 
   const riceBrownSpot = await Disease.create({
@@ -61,7 +61,7 @@ const seedData = async () => {
     slug: 'rice-brown-spot',
     symptoms: { en: 'Oval brown spots with yellow halo on leaves, dark brown spots on grains', hi: 'पत्तियों पर पीले घेरे के साथ अंडाकार भूरे धब्बे, दानों पर गहरे भूरे धब्बे' },
     prevention: { en: 'Treat seeds with thiram, apply mancozeb, maintain proper nutrition', hi: 'बीजों को थीरम से उपचारित करें, मैन्कोज़ेब लगाएं' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80'], products: [], crops: []
   })
 
   const riceBacterialBlight = await Disease.create({
@@ -69,7 +69,7 @@ const seedData = async () => {
     slug: 'rice-bacterial-blight',
     symptoms: { en: 'Water-soaked lesions on leaf margins turning yellow, wilting of seedlings', hi: 'पत्ती किनारों पर पानी से भरे घाव जो पीले पड़ जाते हैं, पौधों का मुरझाना' },
     prevention: { en: 'Use certified disease-free seeds, copper-based bactericide, drain flooded fields', hi: 'रोगमुक्त प्रमाणित बीज उपयोग करें, तांबा आधारित जीवाणुनाशक लगाएं' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80'], products: [], crops: []
   })
 
   // POTATO diseases
@@ -78,7 +78,7 @@ const seedData = async () => {
     slug: 'potato-early-blight',
     symptoms: { en: 'Dark brown circular spots with concentric rings on older leaves', hi: 'पुरानी पत्तियों पर सांद्रित छल्लों के साथ गहरे भूरे गोलाकार धब्बे' },
     prevention: { en: 'Apply mancozeb or chlorothalonil, remove infected plant debris, crop rotation', hi: 'मैन्कोज़ेब या क्लोरोथैलोनिल लगाएं, संक्रमित पौधों के अवशेष हटाएं' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&q=80'], products: [], crops: []
   })
 
   const potatoLateBlight = await Disease.create({
@@ -86,7 +86,7 @@ const seedData = async () => {
     slug: 'potato-late-blight',
     symptoms: { en: 'Water-soaked dark lesions on leaves and stems, white mold on underside, tuber rot', hi: 'पत्तियों और तनों पर पानी से भरे गहरे घाव, निचली तरफ सफेद फफूंद, कंद सड़न' },
     prevention: { en: 'Apply metalaxyl fungicide, avoid excessive moisture, remove volunteer plants', hi: 'मेटालेक्सिल फफूंदनाशक लगाएं, अत्यधिक नमी से बचें' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80'], products: [], crops: []
   })
 
   // TOMATO diseases
@@ -95,7 +95,7 @@ const seedData = async () => {
     slug: 'tomato-leaf-curl',
     symptoms: { en: 'Upward curling of leaves, yellowing, stunted growth, reduced fruit set', hi: 'पत्तियों का ऊपर की ओर मुड़ना, पीलापन, विकास रुकना, फल कम लगना' },
     prevention: { en: 'Control whitefly vectors, use virus-resistant varieties, remove infected plants', hi: 'सफेद मक्खी को नियंत्रित करें, विषाणु प्रतिरोधी किस्में उपयोग करें' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=800&q=80'], products: [], crops: []
   })
 
   const tomatoEarlyBlight = await Disease.create({
@@ -103,7 +103,7 @@ const seedData = async () => {
     slug: 'tomato-early-blight',
     symptoms: { en: 'Dark brown spots with concentric rings on lower leaves, defoliation', hi: 'निचली पत्तियों पर सांद्रित छल्लों के साथ गहरे भूरे धब्बे, पत्ती झड़ना' },
     prevention: { en: 'Apply copper fungicide, maintain plant spacing, avoid wetting foliage', hi: 'तांबा फफूंदनाशक लगाएं, पौधों के बीच उचित दूरी रखें' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80'], products: [], crops: []
   })
 
   const tomatoWilt = await Disease.create({
@@ -111,7 +111,7 @@ const seedData = async () => {
     slug: 'tomato-fusarium-wilt',
     symptoms: { en: 'Yellowing and wilting of lower leaves, brown discoloration of vascular tissue', hi: 'निचली पत्तियों का पीला पड़ना और मुरझाना, संवहनी ऊतक का भूरा पड़ना' },
     prevention: { en: 'Use resistant varieties, soil solarization, avoid waterlogging', hi: 'प्रतिरोधी किस्में उपयोग करें, मिट्टी सोलराइजेशन करें, जलभराव से बचें' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80'], products: [], crops: []
   })
 
   // COTTON diseases
@@ -120,7 +120,7 @@ const seedData = async () => {
     slug: 'cotton-bollworm',
     symptoms: { en: 'Holes in bolls, damaged squares and flowers, presence of caterpillars', hi: 'टिंडों में छेद, क्षतिग्रस्त कलियां और फूल, इल्लियों की उपस्थिति' },
     prevention: { en: 'Use Bt cotton varieties, apply spinosad insecticide, pheromone traps', hi: 'बीटी कपास किस्में उपयोग करें, स्पिनोसैड कीटनाशक लगाएं, फेरोमोन ट्रैप लगाएं' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=800&q=80'], products: [], crops: []
   })
 
   const cottonLeafSpot = await Disease.create({
@@ -128,7 +128,7 @@ const seedData = async () => {
     slug: 'cotton-leaf-spot',
     symptoms: { en: 'Angular water-soaked spots on leaves turning brown, defoliation in severe cases', hi: 'पत्तियों पर कोणीय पानी से भरे धब्बे जो भूरे पड़ जाते हैं' },
     prevention: { en: 'Spray copper oxychloride, use disease-free seeds, avoid overhead irrigation', hi: 'कॉपर ऑक्सीक्लोराइड छिड़कें, रोगमुक्त बीज उपयोग करें' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80'], products: [], crops: []
   })
 
   // MAIZE diseases
@@ -137,7 +137,7 @@ const seedData = async () => {
     slug: 'maize-northern-blight',
     symptoms: { en: 'Long cigar-shaped tan lesions on leaves, premature drying of leaves', hi: 'पत्तियों पर लंबे सिगार आकार के हल्के भूरे घाव, पत्तियों का समय से पहले सूखना' },
     prevention: { en: 'Use resistant hybrids, apply mancozeb, crop rotation with non-host crops', hi: 'प्रतिरोधी संकर किस्में उपयोग करें, मैन्कोज़ेब लगाएं, फसल चक्र अपनाएं' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1601593346740-925612772716?w=800&q=80'], products: [], crops: []
   })
 
   const maizeRust = await Disease.create({
@@ -145,7 +145,7 @@ const seedData = async () => {
     slug: 'maize-rust',
     symptoms: { en: 'Brick-red powdery pustules on both leaf surfaces, yellowing around pustules', hi: 'दोनों पत्ती सतहों पर ईंट-लाल पाउडर जैसी फुंसियां, फुंसियों के आसपास पीलापन' },
     prevention: { en: 'Plant early, use tolerant varieties, apply propiconazole fungicide', hi: 'जल्दी बुवाई करें, सहनशील किस्में उपयोग करें, प्रोपिकोनाज़ोल फफूंदनाशक लगाएं' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80'], products: [], crops: []
   })
 
   // ONION diseases
@@ -154,7 +154,7 @@ const seedData = async () => {
     slug: 'onion-purple-blotch',
     symptoms: { en: 'Small white spots with purple center on leaves, lesions expand with yellow margin', hi: 'पत्तियों पर बैंगनी केंद्र के साथ छोटे सफेद धब्बे, पीले किनारे के साथ घाव फैलते हैं' },
     prevention: { en: 'Apply mancozeb or iprodione, avoid overhead irrigation, remove crop debris', hi: 'मैन्कोज़ेब या इप्रोडियोन लगाएं, ऊपर से सिंचाई से बचें' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=800&q=80'], products: [], crops: []
   })
 
   const onionThrips = await Disease.create({
@@ -162,7 +162,7 @@ const seedData = async () => {
     slug: 'onion-thrips',
     symptoms: { en: 'Silver streaks on leaves, leaf tips turning white, stunted bulb development', hi: 'पत्तियों पर चांदी जैसी धारियां, पत्ती सिरे सफेद पड़ना, बल्ब विकास रुकना' },
     prevention: { en: 'Apply spinosad or imidacloprid, use blue sticky traps, maintain field hygiene', hi: 'स्पिनोसैड या इमिडाक्लोप्रिड लगाएं, नीले चिपचिपे ट्रैप उपयोग करें' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80'], products: [], crops: []
   })
 
   // SOYBEAN diseases
@@ -171,7 +171,7 @@ const seedData = async () => {
     slug: 'soybean-rust',
     symptoms: { en: 'Tan to dark brown lesions on leaves, orange pustules on leaf undersides', hi: 'पत्तियों पर हल्के से गहरे भूरे घाव, पत्ती के नीचे नारंगी फुंसियां' },
     prevention: { en: 'Apply triazole fungicide, plant early maturing varieties, monitor regularly', hi: 'ट्रायज़ोल फफूंदनाशक लगाएं, जल्दी पकने वाली किस्में लगाएं' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80'], products: [], crops: []
   })
 
   const soybeanMosaic = await Disease.create({
@@ -179,7 +179,7 @@ const seedData = async () => {
     slug: 'soybean-mosaic',
     symptoms: { en: 'Mottled yellow-green mosaic pattern on leaves, leaf distortion, reduced pod set', hi: 'पत्तियों पर पीले-हरे मोज़ेक पैटर्न, पत्ती विकृति, फली कम लगना' },
     prevention: { en: 'Use virus-free certified seeds, control aphid vectors, remove infected plants', hi: 'विषाणुमुक्त प्रमाणित बीज उपयोग करें, एफिड को नियंत्रित करें' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80'], products: [], crops: []
   })
 
   // SUGARCANE diseases
@@ -188,7 +188,7 @@ const seedData = async () => {
     slug: 'sugarcane-red-rot',
     symptoms: { en: 'Internal reddening of stalk with white patches, sour smell, wilting of top leaves', hi: 'सफेद धब्बों के साथ तने का आंतरिक लाल पड़ना, खट्टी गंध, ऊपरी पत्तियों का मुरझाना' },
     prevention: { en: 'Use disease-free setts, treat with carbendazim, destroy infected crop debris', hi: 'रोगमुक्त पेड़ी उपयोग करें, कार्बेंडाजिम से उपचारित करें' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80'], products: [], crops: []
   })
 
   const sugarcaneSmut = await Disease.create({
@@ -196,7 +196,7 @@ const seedData = async () => {
     slug: 'sugarcane-smut',
     symptoms: { en: 'Black whip-like structure emerging from shoot, thin stalks, many tillers', hi: 'अंकुर से काली चाबुक जैसी संरचना निकलना, पतले तने, अधिक कल्ले' },
     prevention: { en: 'Use smut-resistant varieties, hot water treatment of setts at 52°C for 30 min', hi: 'कंडुआ प्रतिरोधी किस्में उपयोग करें, पेड़ी को 52°C पर 30 मिनट गर्म पानी उपचार दें' },
-    severity: 'high', images: [], products: [], crops: []
+    severity: 'high', images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80'], products: [], crops: []
   })
 
   // MUSTARD diseases
@@ -205,7 +205,7 @@ const seedData = async () => {
     slug: 'mustard-white-rust',
     symptoms: { en: 'White blister-like pustules on leaves and stems, distortion of floral parts', hi: 'पत्तियों और तनों पर सफेद छाले जैसी फुंसियां, फूल के हिस्सों की विकृति' },
     prevention: { en: 'Apply metalaxyl-mancozeb, use tolerant varieties, early sowing', hi: 'मेटालेक्सिल-मैन्कोज़ेब लगाएं, सहनशील किस्में उपयोग करें, जल्दी बुवाई करें' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80'], products: [], crops: []
   })
 
   const mustardAphids = await Disease.create({
@@ -213,7 +213,7 @@ const seedData = async () => {
     slug: 'mustard-aphids',
     symptoms: { en: 'Colonies of small insects on tender shoots and pods, yellowing, honeydew secretion', hi: 'कोमल अंकुरों और फलियों पर छोटे कीड़ों की कॉलोनी, पीलापन, मधुरस स्राव' },
     prevention: { en: 'Spray dimethoate or imidacloprid, conserve natural enemies, timely sowing', hi: 'डाइमेथोएट या इमिडाक्लोप्रिड छिड़कें, प्राकृतिक शत्रुओं को संरक्षित करें' },
-    severity: 'medium', images: [], products: [], crops: []
+    severity: 'medium', images: ['https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80'], products: [], crops: []
   })
 
   console.log('Diseases created ✅')
@@ -229,7 +229,7 @@ const seedData = async () => {
     season: { en: 'October to March', hi: 'अक्टूबर से मार्च' },
     irrigationNeeds: { en: 'Moderate — 4 to 5 irrigations needed', hi: 'मध्यम — 4 से 5 सिंचाई की आवश्यकता' },
     soilType: { en: 'Loamy and Clay Loam soil', hi: 'दोमट और चिकनी दोमट मिट्टी' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800&q=80'],
     diseases: [wheatBlight._id, wheatRust._id, wheatPowderyMildew._id]
   })
 
@@ -240,7 +240,7 @@ const seedData = async () => {
     season: { en: 'June to November', hi: 'जून से नवंबर' },
     irrigationNeeds: { en: 'High — requires standing water in field', hi: 'अधिक — खेत में खड़े पानी की आवश्यकता' },
     soilType: { en: 'Clay and Clay Loam soil', hi: 'चिकनी और चिकनी दोमट मिट्टी' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=800&q=80'],
     diseases: [riceBlast._id, riceBrownSpot._id, riceBacterialBlight._id]
   })
 
@@ -251,7 +251,7 @@ const seedData = async () => {
     season: { en: 'October to March', hi: 'अक्टूबर से मार्च' },
     irrigationNeeds: { en: 'Moderate — 5 to 6 irrigations needed', hi: 'मध्यम — 5 से 6 सिंचाई की आवश्यकता' },
     soilType: { en: 'Sandy Loam and Loamy soil', hi: 'बलुई दोमट और दोमट मिट्टी' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&q=80'],
     diseases: [potatoEarlyBlight._id, potatoLateBlight._id]
   })
 
@@ -262,7 +262,7 @@ const seedData = async () => {
     season: { en: 'June to February', hi: 'जून से फरवरी' },
     irrigationNeeds: { en: 'Moderate — drip irrigation recommended', hi: 'मध्यम — ड्रिप सिंचाई अनुशंसित' },
     soilType: { en: 'Well-drained Sandy Loam soil', hi: 'अच्छी जल निकासी वाली बलुई दोमट मिट्टी' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=800&q=80'],
     diseases: [tomatoLeafCurl._id, tomatoEarlyBlight._id, tomatoWilt._id]
   })
 
@@ -273,7 +273,7 @@ const seedData = async () => {
     season: { en: 'April to December', hi: 'अप्रैल से दिसंबर' },
     irrigationNeeds: { en: 'Moderate — 6 to 8 irrigations needed', hi: 'मध्यम — 6 से 8 सिंचाई की आवश्यकता' },
     soilType: { en: 'Black Cotton soil and Deep Loam', hi: 'काली कपास मिट्टी और गहरी दोमट' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=800&q=80'],
     diseases: [cottonBollworm._id, cottonLeafSpot._id]
   })
 
@@ -284,7 +284,7 @@ const seedData = async () => {
     season: { en: 'June to October', hi: 'जून से अक्टूबर' },
     irrigationNeeds: { en: 'Moderate — 4 to 6 irrigations needed', hi: 'मध्यम — 4 से 6 सिंचाई की आवश्यकता' },
     soilType: { en: 'Well-drained Loamy soil', hi: 'अच्छी जल निकासी वाली दोमट मिट्टी' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1601593346740-925612772716?w=800&q=80'],
     diseases: [maizeNorthernBlight._id, maizeRust._id]
   })
 
@@ -295,7 +295,7 @@ const seedData = async () => {
     season: { en: 'October to May', hi: 'अक्टूबर से मई' },
     irrigationNeeds: { en: 'Moderate — 10 to 12 irrigations needed', hi: 'मध्यम — 10 से 12 सिंचाई की आवश्यकता' },
     soilType: { en: 'Sandy Loam to Clay Loam soil', hi: 'बलुई दोमट से चिकनी दोमट मिट्टी' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=800&q=80'],
     diseases: [onionPurpleBlotch._id, onionThrips._id]
   })
 
@@ -306,7 +306,7 @@ const seedData = async () => {
     season: { en: 'June to October', hi: 'जून से अक्टूबर' },
     irrigationNeeds: { en: 'Low to Moderate — 2 to 3 irrigations needed', hi: 'कम से मध्यम — 2 से 3 सिंचाई की आवश्यकता' },
     soilType: { en: 'Well-drained Loamy to Clay Loam soil', hi: 'अच्छी जल निकासी वाली दोमट से चिकनी दोमट मिट्टी' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=800&q=80'],
     diseases: [soybeanRust._id, soybeanMosaic._id]
   })
 
@@ -317,7 +317,7 @@ const seedData = async () => {
     season: { en: 'February to December', hi: 'फरवरी से दिसंबर' },
     irrigationNeeds: { en: 'High — 20 to 25 irrigations needed', hi: 'अधिक — 20 से 25 सिंचाई की आवश्यकता' },
     soilType: { en: 'Deep Well-drained Loamy soil', hi: 'गहरी अच्छी जल निकासी वाली दोमट मिट्टी' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80'],
     diseases: [sugarcaneRedRot._id, sugarcaneSmut._id]
   })
 
@@ -328,7 +328,7 @@ const seedData = async () => {
     season: { en: 'October to March', hi: 'अक्टूबर से मार्च' },
     irrigationNeeds: { en: 'Low — 2 to 3 irrigations needed', hi: 'कम — 2 से 3 सिंचाई की आवश्यकता' },
     soilType: { en: 'Sandy Loam and Loamy soil', hi: 'बलुई दोमट और दोमट मिट्टी' },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80'],
     diseases: [mustardWhiteRust._id, mustardAphids._id]
   })
 
@@ -355,6 +355,157 @@ const seedData = async () => {
 
   console.log('Disease-Crop references updated ✅')
   console.log('🌱 Seed complete! 10 crops and 22 diseases added.')
+
+  // ============================================================
+// PRODUCTS & LISTINGS
+// ============================================================
+
+const mancozeb = await Product.create({
+  name: { en: 'Mancozeb 75% WP Fungicide', hi: 'मैन्कोज़ेब 75% WP फफूंदनाशक' },
+  type: 'pesticide',
+  description: {
+    en: 'Broad spectrum protective fungicide effective against blight, rust, and leaf spot diseases in wheat, rice, potato and tomato crops.',
+    hi: 'व्यापक स्पेक्ट्रम सुरक्षात्मक फफूंदनाशक जो गेहूं, धान, आलू और टमाटर में झुलसा, रतुआ और पत्ती धब्बा रोगों के विरुद्ध प्रभावी है।'
+  },
+  images: ['https://images.unsplash.com/photo-1635273051677-0b1b5e6e4b6e?w=800&q=80'],
+})
+
+const dap = await Product.create({
+  name: { en: 'DAP Fertilizer (50 kg)', hi: 'डीएपी खाद (50 किलो)' },
+  type: 'fertilizer',
+  description: {
+    en: 'Di-ammonium phosphate fertilizer providing nitrogen and phosphorus for strong root development and higher yield across all crops.',
+    hi: 'डाई-अमोनियम फॉस्फेट खाद जो सभी फसलों में मजबूत जड़ विकास और अधिक उत्पादन के लिए नाइट्रोजन और फास्फोरस प्रदान करता है।'
+  },
+  images: ['https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80'],
+})
+
+const imidacloprid = await Product.create({
+  name: { en: 'Imidacloprid 17.8% SL Insecticide', hi: 'इमिडाक्लोप्रिड 17.8% SL कीटनाशक' },
+  type: 'pesticide',
+  description: {
+    en: 'Systemic insecticide for controlling sucking pests like aphids, thrips and whitefly in cotton, onion, mustard and soybean crops.',
+    hi: 'प्रणालीगत कीटनाशक जो कपास, प्याज, सरसों और सोयाबीन में एफिड, थ्रिप्स और सफेद मक्खी जैसे रसचूसक कीटों को नियंत्रित करता है।'
+  },
+  images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80'],
+})
+
+// Listings for Mancozeb — 3 vendors
+const m_listing1 = await Listing.create({
+  product: mancozeb._id,
+  seller: { name: 'Krishi Store Indore', contact: '9876543210' },
+  price: 450,
+  stock: 150,
+  deliveryDays: 2
+})
+const m_listing2 = await Listing.create({
+  product: mancozeb._id,
+  seller: { name: 'AgriMart Online', contact: '9123456789' },
+  price: 420,
+  stock: 80,
+  deliveryDays: 4
+})
+const m_listing3 = await Listing.create({
+  product: mancozeb._id,
+  seller: { name: 'Kisan Bazaar', contact: '9988776655' },
+  price: 480,
+  stock: 200,
+  deliveryDays: 1
+})
+
+// Listings for DAP — 3 vendors
+const d_listing1 = await Listing.create({
+  product: dap._id,
+  seller: { name: 'Krishi Store Indore', contact: '9876543210' },
+  price: 1350,
+  stock: 500,
+  deliveryDays: 2
+})
+const d_listing2 = await Listing.create({
+  product: dap._id,
+  seller: { name: 'AgriMart Online', contact: '9123456789' },
+  price: 1299,
+  stock: 300,
+  deliveryDays: 3
+})
+const d_listing3 = await Listing.create({
+  product: dap._id,
+  seller: { name: 'Kisan Bazaar', contact: '9988776655' },
+  price: 1399,
+  stock: 100,
+  deliveryDays: 1
+})
+
+// Listings for Imidacloprid — 3 vendors
+const i_listing1 = await Listing.create({
+  product: imidacloprid._id,
+  seller: { name: 'Krishi Store Indore', contact: '9876543210' },
+  price: 320,
+  stock: 200,
+  deliveryDays: 2
+})
+const i_listing2 = await Listing.create({
+  product: imidacloprid._id,
+  seller: { name: 'AgriMart Online', contact: '9123456789' },
+  price: 299,
+  stock: 150,
+  deliveryDays: 3
+})
+const i_listing3 = await Listing.create({
+  product: imidacloprid._id,
+  seller: { name: 'Kisan Bazaar', contact: '9988776655' },
+  price: 340,
+  stock: 75,
+  deliveryDays: 1
+})
+
+// Link listings to products
+await Product.findByIdAndUpdate(mancozeb._id, {
+  listings: [m_listing1._id, m_listing2._id, m_listing3._id]
+})
+await Product.findByIdAndUpdate(dap._id, {
+  listings: [d_listing1._id, d_listing2._id, d_listing3._id]
+})
+await Product.findByIdAndUpdate(imidacloprid._id, {
+  listings: [i_listing1._id, i_listing2._id, i_listing3._id]
+})
+
+// Link products to relevant diseases
+// Mancozeb — works for blight, rust, leaf spot diseases
+await Disease.updateMany(
+  { slug: { $in: [
+    'wheat-blight', 'wheat-rust', 'wheat-powdery-mildew',
+    'rice-blast', 'rice-brown-spot',
+    'potato-early-blight', 'potato-late-blight',
+    'tomato-early-blight', 'onion-purple-blotch',
+    'maize-northern-blight', 'maize-rust',
+    'soybean-rust', 'mustard-white-rust'
+  ]}},
+  { $addToSet: { products: mancozeb._id } }
+)
+
+// DAP — good for all crops as base fertilizer
+await Disease.updateMany(
+  { slug: { $in: [
+    'wheat-blight', 'rice-blast',
+    'potato-early-blight', 'tomato-fusarium-wilt',
+    'sugarcane-red-rot', 'maize-northern-blight'
+  ]}},
+  { $addToSet: { products: dap._id } }
+)
+
+// Imidacloprid — for sucking pest diseases
+await Disease.updateMany(
+  { slug: { $in: [
+    'cotton-bollworm', 'onion-thrips',
+    'mustard-aphids', 'tomato-leaf-curl',
+    'soybean-mosaic', 'cotton-leaf-spot'
+  ]}},
+  { $addToSet: { products: imidacloprid._id } }
+)
+
+console.log('Products & Listings created ✅')
+
   process.exit(0)
 }
 
