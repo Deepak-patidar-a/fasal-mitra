@@ -1,21 +1,23 @@
-import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
-const variants = {
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -8 }
+const PageTransition = ({ children }: { children: React.ReactNode }) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    el.style.opacity = '0'
+    el.style.transform = 'translateY(12px)'
+    el.style.transition = 'opacity 0.25s ease, transform 0.25s ease'
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.style.opacity = '1'
+        el.style.transform = 'translateY(0)'
+      })
+    })
+  }, [])
+
+  return <div ref={ref}>{children}</div>
 }
-
-const PageTransition = ({ children }: { children: React.ReactNode }) => (
-  <motion.div
-    variants={variants}
-    initial="initial"
-    animate="animate"
-    exit="exit"
-    transition={{ duration: 0.25, ease: 'easeOut' }}
-  >
-    {children}
-  </motion.div>
-)
 
 export default PageTransition

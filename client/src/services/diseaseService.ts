@@ -1,6 +1,4 @@
-import api from './api'
+import apiFetch from './api'
 
-export const getDiseaseBySlug = async (slug: string) => {
-  const res = await api.get(`/diseases/${slug}`)
-  return res.data
-}
+export const getDiseaseBySlug = (slug: string) =>
+  apiFetch(`/diseases/${slug}`)

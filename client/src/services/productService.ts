@@ -1,11 +1,7 @@
-import api from './api'
+import apiFetch from './api'
 
-export const getProductById = async (id: string) => {
-  const res = await api.get(`/products/${id}`)
-  return res.data
-}
+export const getProductById = (id: string) =>
+  apiFetch(`/products/${id}`)
 
-export const getAllProducts = async () => {
-  const res = await api.get('/products')
-  return res.data
-}
+export const getAllProducts = () =>
+  apiFetch('/products')

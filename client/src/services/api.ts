@@ -1,63 +1,80 @@
-import axios from 'axios'
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
-  withCredentials: true
-})
+interface RequestOptions {
+  method?: string
+  body?: any
+  headers?: Record<string, string>
+}
 
 let isRefreshing = false
 let failedQueue: Array<{
-  resolve: (value?: unknown) => void
-  reject: (reason?: unknown) => void
+  resolve: (value: any) => void
+  reject: (reason: any) => void
+  url: string
+  options: RequestOptions
 }> = []
 
-const processQueue = (error: unknown) => {
-  failedQueue.forEach((prom) => {
-    if (error) {
-      prom.reject(error)
-    } else {
-      prom.resolve()
-    }
+const processQueue = (error: any) => {
+  failedQueue.forEach(({ resolve, reject, url, options }) => {
+    if (error) reject(error)
+    else resolve(apiFetch(url, options))
   })
   failedQueue = []
 }
 
-api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config
+export const apiFetch = async (
+  endpoint: string,
+  options: RequestOptions = {}
+): Promise<any> => {
+  const url = `${BASE_URL}${endpoint}`
 
-    // If error is 401 and we haven't retried yet
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      if (isRefreshing) {
-        // If already refreshing, queue this request
-        return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject })
-        })
-          .then(() => api(originalRequest))
-          .catch((err) => Promise.reject(err))
-      }
+  const response = await fetch(url, {
+    method: options.method || 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers
+    },
+    body: options.body ? JSON.stringify(options.body) : undefined
+  })
 
-      originalRequest._retry = true
-      isRefreshing = true
-
-      try {
-        // Try to get new access token
-        await api.post('/auth/refresh')
-        processQueue(null)
-        return api(originalRequest)
-      } catch (refreshError) {
-        // Refresh failed — user needs to login again
-        processQueue(refreshError)
-        window.location.href = '/login'
-        return Promise.reject(refreshError)
-      } finally {
-        isRefreshing = false
-      }
+  // Token expired — try refresh
+  if (response.status === 401 && !endpoint.includes('/auth/refresh')) {
+    if (isRefreshing) {
+      return new Promise((resolve, reject) => {
+        failedQueue.push({ resolve, reject, url: endpoint, options })
+      })
     }
 
-    return Promise.reject(error)
-  }
-)
+    isRefreshing = true
 
-export default api
+    try {
+      const refreshRes = await fetch(`${BASE_URL}/auth/refresh`, {
+        method: 'POST',
+        credentials: 'include'
+      })
+
+      if (!refreshRes.ok) throw new Error('Refresh failed')
+
+      processQueue(null)
+      return apiFetch(endpoint, options)
+    } catch (err) {
+      processQueue(err)
+      window.location.href = '/login'
+      throw err
+    } finally {
+      isRefreshing = false
+    }
+  }
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ message: 'Request failed' }))
+    throw new Error(error.message || 'Request failed')
+  }
+
+  // Handle empty responses
+  const text = await response.text()
+  return text ? JSON.parse(text) : null
+}
+
+export default apiFetch

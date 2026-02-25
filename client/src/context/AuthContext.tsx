@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
-import api from '@/services/api'
+import { apiFetch } from '@/services/api'
 
 interface User {
   _id: string
@@ -37,54 +37,53 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [savedCrops, setSavedCrops] = useState<string[]>([])
 
   useEffect(() => {
-    const fetchMe = async () => {
-      try {
-        const res = await api.get('/auth/me')
-        setUser(res.data)
-        // Load saved crops
-        const saved = await api.get('/auth/saved-crops')
-        setSavedCrops(saved.data.map((c: any) => c._id))
-      } catch {
-        setUser(null)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchMe()
-  }, [])
-
-  const login = async (email: string, password: string) => {
-    const res = await api.post('/auth/login', { email, password })
-    setUser(res.data)
-    const saved = await api.get('/auth/saved-crops')
-    setSavedCrops(saved.data.map((c: any) => c._id))
-  }
-
-  const register = async (data: RegisterData) => {
-    const res = await api.post('/auth/register', data)
-    setUser(res.data)
-  }
-
-  const logout = async () => {
-    await api.post('/auth/logout')
-    setUser(null)
-    setSavedCrops([])
-  }
-
-  const toggleSaveCrop = async (cropId: string) => {
-    if (!user) return
-    const res = await api.post('/auth/save-crop', { cropId })
-    if (res.data.saved) {
-      setSavedCrops((prev) => [...prev, cropId])
-    } else {
-      setSavedCrops((prev) => prev.filter((id) => id !== cropId))
+  const fetchMe = async () => {
+    try {
+      const user = await apiFetch('/auth/me')
+      setUser(user)
+      const saved = await apiFetch('/auth/saved-crops')
+      setSavedCrops(saved.map((c: any) => c._id))
+    } catch {
+      setUser(null)
+    } finally {
+      setLoading(false)
     }
   }
+  fetchMe()
+}, [])
 
-  const addToSearchHistory = async (query: string) => {
-    if (!user) return
-    await api.post('/auth/search-history', { query })
+const login = async (email: string, password: string) => {
+  const user = await apiFetch('/auth/login', { method: 'POST', body: { email, password } })
+  setUser(user)
+  const saved = await apiFetch('/auth/saved-crops')
+  setSavedCrops(saved.map((c: any) => c._id))
+}
+
+const register = async (data: RegisterData) => {
+  const user = await apiFetch('/auth/register', { method: 'POST', body: data })
+  setUser(user)
+}
+
+const logout = async () => {
+  await apiFetch('/auth/logout', { method: 'POST' })
+  setUser(null)
+  setSavedCrops([])
+}
+
+const toggleSaveCrop = async (cropId: string) => {
+  if (!user) return
+  const res = await apiFetch('/auth/save-crop', { method: 'POST', body: { cropId } })
+  if (res.saved) {
+    setSavedCrops((prev) => [...prev, cropId])
+  } else {
+    setSavedCrops((prev) => prev.filter((id) => id !== cropId))
   }
+}
+
+const addToSearchHistory = async (query: string) => {
+  if (!user) return
+  await apiFetch('/auth/search-history', { method: 'POST', body: { query } })
+}
 
   return (
     <AuthContext.Provider value={{

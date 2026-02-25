@@ -4,7 +4,6 @@ import Navbar from '@/components/common/Navbar'
 import Footer from '@/components/common/Footer'
 import ProtectedRoute from '@/components/common/ProtectedRoute'
 import { Leaf } from 'lucide-react'
-import { AnimatePresence } from 'framer-motion'
 import BottomNav from '@/components/common/BottomNav'
 
 const Home = lazy(() => import('@/pages/Home'))
@@ -35,7 +34,6 @@ function App() {
         <Navbar />
         <main className="flex-1 pb-16 md:pb-0">
           <Suspense fallback={<PageLoader />}>
-          <AnimatePresence mode="wait">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/crops" element={<Crops />} />
@@ -52,7 +50,6 @@ function App() {
             } />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      </AnimatePresence>
       </Suspense>
       </main>
       {/* Footer only on desktop */}

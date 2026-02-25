@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Leaf, AlertTriangle } from 'lucide-react'
 import { getAllCrops } from '@/services/cropService'
-import { CropDetailSkeleton, CropsPageSkeleton } from '@/components/common/Skeleton'
+import { CropsPageSkeleton } from '@/components/common/Skeleton'
 import PageTransition from '@/components/common/PageTransition'
 
 

@@ -1,16 +1,10 @@
-import api from './api'
+import apiFetch from './api'
 
-export const getCropBySlug = async (slug: string) => {
-  const res = await api.get(`/crops/${slug}`)
-  return res.data
-}
+export const getCropBySlug = (slug: string) =>
+  apiFetch(`/crops/${slug}`)
 
-export const getAllCrops = async () => {
-  const res = await api.get('/crops')
-  return res.data
-}
+export const getAllCrops = () =>
+  apiFetch('/crops')
 
-export const searchCrops = async (query: string) => {
-  const res = await api.get(`/crops/search?q=${query}`)
-  return res.data
-}
+export const searchCrops = (q: string) =>
+  apiFetch(`/crops/search?q=${encodeURIComponent(q)}`)

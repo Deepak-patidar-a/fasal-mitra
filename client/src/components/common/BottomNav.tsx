@@ -1,12 +1,11 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Home, Leaf, Microscope, MessageCircle, User } from 'lucide-react'
+import { Home, Leaf, MessageCircle, User } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 
 const BottomNav = () => {
   const { t } = useTranslation()
   const { user } = useAuth()
-  const navigate = useNavigate()
 
   const navItems = [
     { to: '/', icon: Home, label: t('home') },
