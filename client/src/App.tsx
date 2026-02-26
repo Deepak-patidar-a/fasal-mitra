@@ -5,6 +5,7 @@ import Footer from '@/components/common/Footer'
 import ProtectedRoute from '@/components/common/ProtectedRoute'
 import { Leaf } from 'lucide-react'
 import BottomNav from '@/components/common/BottomNav'
+import { useAuth } from './context/AuthContext'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Crops = lazy(() => import('@/pages/Crops'))
@@ -29,15 +30,28 @@ const PageLoader = () => (
   </div>
 )
 
-function App() {
+
+const AppContent = () => {
+  const { loading } = useAuth()
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <Leaf className="w-10 h-10 text-primary animate-pulse" />
+          <p className="text-text-secondary text-sm">फसल मित्र...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <BrowserRouter>
-    <div className="min-h-screen bg-background flex flex-col">
-        <Navbar />
-        <main className="flex-1 pb-16 md:pb-0">
-          <Suspense fallback={<PageLoader />}>
-      <Routes>
-        <Route path="/" element={<Home />} />
+    <>
+      <Navbar />
+      <main className="flex-1 pb-16 md:pb-0">
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
         <Route path="/crops" element={<Crops />} />
         <Route path="/crop/:slug" element={<CropDetail />} />
         <Route path="/disease/:slug" element={<DiseaseDetail />} />
@@ -61,21 +75,28 @@ function App() {
               </ProtectedRoute>
             } />
         <Route path="*" element={<NotFound />} />
-      </Routes>
-      </Suspense>
+          </Routes>
+        </Suspense>
       </main>
-      {/* Footer only on desktop */}
       <div className="hidden md:block">
         <Footer />
       </div>
-
-      {/* Bottom Nav only on mobile */}
       <div className="md:hidden">
         <BottomNav />
       </div>
-    </div>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-background flex flex-col">
+        <AppContent />
+      </div>
     </BrowserRouter>
   )
 }
+
 
 export default App
