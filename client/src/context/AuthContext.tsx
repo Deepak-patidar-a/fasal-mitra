@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, type ReactNode, useRef } from 'react'
 import { apiFetch } from '@/services/api'
 
 interface User {
@@ -35,8 +35,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [savedCrops, setSavedCrops] = useState<string[]>([])
-
+  const hasFetched = useRef(false)
+  
   useEffect(() => {
+    if (hasFetched.current) return  // prevent double call from StrictMode
+    hasFetched.current = true
+
   const fetchMe = async () => {
     try {
       const user = await apiFetch('/auth/me')

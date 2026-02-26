@@ -20,7 +20,6 @@ const NotFound = lazy(() => import('@/pages/NotFound'))
 const Orders = lazy(() => import('@/pages/Orders'))
 const SavedCrops = lazy(() => import('@/pages/SavedCrops'))
 
-// Global loading fallback
 const PageLoader = () => (
   <div className="min-h-screen bg-background flex items-center justify-center">
     <div className="flex flex-col items-center gap-4">
@@ -29,7 +28,6 @@ const PageLoader = () => (
     </div>
   </div>
 )
-
 
 const AppContent = () => {
   const { loading } = useAuth()
@@ -52,14 +50,14 @@ const AppContent = () => {
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
-        <Route path="/crops" element={<Crops />} />
-        <Route path="/crop/:slug" element={<CropDetail />} />
-        <Route path="/disease/:slug" element={<DiseaseDetail />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/chat/:room" element={<Chat />} />
-        <Route path="/profile" element={
+            <Route path="/crops" element={<Crops />} />
+            <Route path="/crop/:slug" element={<CropDetail />} />
+            <Route path="/disease/:slug" element={<DiseaseDetail />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/chat/:room" element={<Chat />} />
+            <Route path="/profile" element={
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
@@ -74,7 +72,7 @@ const AppContent = () => {
                 <SavedCrops />
               </ProtectedRoute>
             } />
-        <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
@@ -97,6 +95,5 @@ function App() {
     </BrowserRouter>
   )
 }
-
 
 export default App
