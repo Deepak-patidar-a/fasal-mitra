@@ -1,34 +1,9 @@
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
-interface RequestOptions {
-  method?: string
-  body?: any
-  headers?: Record<string, string>
-}
-
 let isRefreshing = false
-let failedQueue: Array<{
-  resolve: (value: any) => void
-  reject: (reason: any) => void
-  url: string
-  options: RequestOptions
-}> = []
 
-const processQueue = (error: any) => {
-  failedQueue.forEach(({ resolve, reject, url, options }) => {
-    if (error) reject(error)
-    else resolve(apiFetch(url, options))
-  })
-  failedQueue = []
-}
-
-export const apiFetch = async (
-  endpoint: string,
-  options: RequestOptions = {}
-): Promise<any> => {
-  const url = `${BASE_URL}${endpoint}`
-
-  const response = await fetch(url, {
+const request = async (endpoint: string, options: any = {}, isRetry = false): Promise<any> => {
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: options.method || 'GET',
     credentials: 'include',
     headers: {
@@ -38,12 +13,15 @@ export const apiFetch = async (
     body: options.body ? JSON.stringify(options.body) : undefined
   })
 
-  // Token expired — try refresh
-  if (response.status === 401 && !endpoint.includes('/auth/refresh')) {
+  // If 401 and this is NOT already a retry — try refresh once
+  if (response.status === 401 && !isRetry) {
+    // Don't retry auth endpoints — avoid infinite loop
+    if (endpoint.includes('/auth/')) {
+      throw new Error('Unauthorized')
+    }
+
     if (isRefreshing) {
-      return new Promise((resolve, reject) => {
-        failedQueue.push({ resolve, reject, url: endpoint, options })
-      })
+      throw new Error('Unauthorized')
     }
 
     isRefreshing = true
@@ -56,12 +34,12 @@ export const apiFetch = async (
 
       if (!refreshRes.ok) throw new Error('Refresh failed')
 
-      processQueue(null)
-      return apiFetch(endpoint, options)
-    } catch (err) {
-      processQueue(err)
+      // Retry original request once with isRetry=true
+      return await request(endpoint, options, true)
+    } catch {
+      // Refresh failed — user needs to login again
       window.location.href = '/login'
-      throw err
+      throw new Error('Session expired')
     } finally {
       isRefreshing = false
     }
@@ -72,9 +50,11 @@ export const apiFetch = async (
     throw new Error(error.message || 'Request failed')
   }
 
-  // Handle empty responses
   const text = await response.text()
   return text ? JSON.parse(text) : null
 }
+
+export const apiFetch = (endpoint: string, options: any = {}) =>
+  request(endpoint, options, false)
 
 export default apiFetch
