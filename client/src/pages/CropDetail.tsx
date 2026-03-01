@@ -109,7 +109,7 @@ const CropDetail = () => {
           <div className="flex flex-col md:flex-row md:items-center gap-6">
             <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border-2 border-border shrink-0 bg-primary/10">
               {crop.images[0] ? (
-                <img
+                <LazyImage
                   src={crop.images[0]}
                   alt={crop.name[lang]}
                   className="w-full h-full object-cover"
