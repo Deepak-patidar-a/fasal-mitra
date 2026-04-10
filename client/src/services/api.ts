@@ -1,6 +1,26 @@
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
-let isRefreshing = false
+let refreshPromise: Promise<void> | null = null
+
+const isRefreshableEndpoint = (endpoint: string) => {
+  const nonRefreshable = ['/auth/login', '/auth/register', '/auth/refresh', '/auth/logout']
+  return !nonRefreshable.some((route) => endpoint.startsWith(route))
+}
+
+const ensureSession = async () => {
+  if (!refreshPromise) {
+    refreshPromise = fetch(`${BASE_URL}/auth/refresh`, {
+      method: 'POST',
+      credentials: 'include'
+    }).then((refreshRes) => {
+      if (!refreshRes.ok) throw new Error('Refresh failed')
+    }).finally(() => {
+      refreshPromise = null
+    })
+  }
+
+  return refreshPromise
+}
 
 const request = async (endpoint: string, options: any = {}, isRetry = false): Promise<any> => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
@@ -13,35 +33,13 @@ const request = async (endpoint: string, options: any = {}, isRetry = false): Pr
     body: options.body ? JSON.stringify(options.body) : undefined
   })
 
-  // If 401 and this is NOT already a retry — try refresh once
-  if (response.status === 401 && !isRetry) {
-    // Don't retry auth endpoints — avoid infinite loop
-    if (endpoint.includes('/auth/')) {
-      throw new Error('Unauthorized')
-    }
-
-    if (isRefreshing) {
-      throw new Error('Unauthorized')
-    }
-
-    isRefreshing = true
-
+  if (response.status === 401 && !isRetry && isRefreshableEndpoint(endpoint)) {
     try {
-      const refreshRes = await fetch(`${BASE_URL}/auth/refresh`, {
-        method: 'POST',
-        credentials: 'include'
-      })
-
-      if (!refreshRes.ok) throw new Error('Refresh failed')
-
-      // Retry original request once with isRetry=true
+      await ensureSession()
       return await request(endpoint, options, true)
     } catch {
-      // Refresh failed — user needs to login again
       window.location.href = '/login'
       throw new Error('Session expired')
-    } finally {
-      isRefreshing = false
     }
   }
 
