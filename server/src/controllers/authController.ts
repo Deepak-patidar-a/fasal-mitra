@@ -73,15 +73,8 @@ export const login = async (req: Request, res: Response) => {
 }
 
 export const logout = async (req: Request, res: Response) => {
-  const cookieOptions = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' as const : 'lax' as const,
-    path: '/'
-  }
-
-  res.clearCookie('accessToken', cookieOptions)
-  res.clearCookie('refreshToken', cookieOptions)
+  res.clearCookie('accessToken')
+  res.clearCookie('refreshToken')
   res.json({ message: 'Logged out successfully' })
 }
 
