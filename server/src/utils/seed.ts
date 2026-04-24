@@ -229,7 +229,7 @@ const seedData = async () => {
     season: { en: 'October to March', hi: 'अक्टूबर से मार्च' },
     irrigationNeeds: { en: 'Moderate — 4 to 5 irrigations needed', hi: 'मध्यम — 4 से 5 सिंचाई की आवश्यकता' },
     soilType: { en: 'Loamy and Clay Loam soil', hi: 'दोमट और चिकनी दोमट मिट्टी' },
-    images: ['https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800&q=80'],
+    images: ['https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300&q=80'],
     diseases: [wheatBlight._id, wheatRust._id, wheatPowderyMildew._id]
   })
 
@@ -240,7 +240,7 @@ const seedData = async () => {
     season: { en: 'June to November', hi: 'जून से नवंबर' },
     irrigationNeeds: { en: 'High — requires standing water in field', hi: 'अधिक — खेत में खड़े पानी की आवश्यकता' },
     soilType: { en: 'Clay and Clay Loam soil', hi: 'चिकनी और चिकनी दोमट मिट्टी' },
-    images: ['https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=800&q=80'],
+    images: ['https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=300&q=80'],
     diseases: [riceBlast._id, riceBrownSpot._id, riceBacterialBlight._id]
   })
 
@@ -251,7 +251,7 @@ const seedData = async () => {
     season: { en: 'October to March', hi: 'अक्टूबर से मार्च' },
     irrigationNeeds: { en: 'Moderate — 5 to 6 irrigations needed', hi: 'मध्यम — 5 से 6 सिंचाई की आवश्यकता' },
     soilType: { en: 'Sandy Loam and Loamy soil', hi: 'बलुई दोमट और दोमट मिट्टी' },
-    images: ['https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&q=80'],
+    images: ['https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80'],
     diseases: [potatoEarlyBlight._id, potatoLateBlight._id]
   })
 
@@ -273,7 +273,7 @@ const seedData = async () => {
     season: { en: 'April to December', hi: 'अप्रैल से दिसंबर' },
     irrigationNeeds: { en: 'Moderate — 6 to 8 irrigations needed', hi: 'मध्यम — 6 से 8 सिंचाई की आवश्यकता' },
     soilType: { en: 'Black Cotton soil and Deep Loam', hi: 'काली कपास मिट्टी और गहरी दोमट' },
-    images: ['https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=800&q=80'],
+    images: ['https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=300&q=80'],
     diseases: [cottonBollworm._id, cottonLeafSpot._id]
   })
 
@@ -284,7 +284,7 @@ const seedData = async () => {
     season: { en: 'June to October', hi: 'जून से अक्टूबर' },
     irrigationNeeds: { en: 'Moderate — 4 to 6 irrigations needed', hi: 'मध्यम — 4 से 6 सिंचाई की आवश्यकता' },
     soilType: { en: 'Well-drained Loamy soil', hi: 'अच्छी जल निकासी वाली दोमट मिट्टी' },
-    images: ['https://images.unsplash.com/photo-1601593346740-925612772716?w=800&q=80'],
+    images: ['https://images.unsplash.com/photo-1601593346740-925612772716?w=300&q=80'],
     diseases: [maizeNorthernBlight._id, maizeRust._id]
   })
 
@@ -295,7 +295,7 @@ const seedData = async () => {
     season: { en: 'October to May', hi: 'अक्टूबर से मई' },
     irrigationNeeds: { en: 'Moderate — 10 to 12 irrigations needed', hi: 'मध्यम — 10 से 12 सिंचाई की आवश्यकता' },
     soilType: { en: 'Sandy Loam to Clay Loam soil', hi: 'बलुई दोमट से चिकनी दोमट मिट्टी' },
-    images: ['https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=800&q=80'],
+    images: ['https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=300&q=80'],
     diseases: [onionPurpleBlotch._id, onionThrips._id]
   })
 

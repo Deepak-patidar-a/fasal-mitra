@@ -24,7 +24,7 @@ const PageLoader = () => (
   <div className="min-h-screen bg-background flex items-center justify-center">
     <div className="flex flex-col items-center gap-4">
       <Leaf className="w-10 h-10 text-primary animate-pulse" />
-      <p className="text-text-secondary text-sm">Loading...</p>
+      <p className="text-text-secondary text-sm">Free Render Services Loading...</p>
     </div>
   </div>
 )
